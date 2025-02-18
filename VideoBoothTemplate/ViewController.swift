@@ -17,6 +17,21 @@ class ViewController: UIViewController,VideoRecorderDelegate {
     func didFinishRecording(url: URL?) {
         if let videoURL = url {
             print(videoURL.absoluteString)
+            
+            let videoEditor = VideoEditor()
+            let outputURL = videoEditor.getVideoFilePath(prefix: "Lazulite")
+
+            // ✅ Set slow motion to start at 3 seconds and last for 5 seconds
+            let slowMotionStart = CMTime(seconds: 3, preferredTimescale: 600)
+            let slowMotionDuration = CMTime(seconds: 5, preferredTimescale: 600)
+
+            videoEditor.applySlowMotionEffect(to: videoURL, slowMotionStart: slowMotionStart, slowMotionDuration: slowMotionDuration, outputURL: outputURL) { success, editedVideoURL in
+                if success, let url = editedVideoURL {
+                    print("🎥 Slow-motion video available at: \(url)")
+                } else {
+                    print("❌ Failed to apply slow motion effect")
+                }
+            }
         }
     }
     
