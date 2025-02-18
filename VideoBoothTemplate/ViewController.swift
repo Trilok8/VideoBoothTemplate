@@ -6,14 +6,71 @@
 //
 
 import UIKit
+import AVFoundation
 
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+class ViewController: UIViewController,VideoRecorderDelegate {
+    
+    @IBOutlet weak var btnRecord: UIButton!
+    @IBOutlet weak var btnStopRecord: UIButton!
+    @IBOutlet weak var recordingView: UIView!
+    
+    func didFinishRecording(url: URL?) {
+        if let videoURL = url {
+            print(videoURL.absoluteString)
+        }
+    }
+    
+    func didFailRecording(error: (any Error)?) {
+        if let err = error {
+            print(err.localizedDescription)
+        }
+    }
+    
+    func didSetupPreviewLayer(_previewLayer: AVCaptureVideoPreviewLayer) {
+        DispatchQueue.main.async {
+            self.previewLayer = _previewLayer
+            self.previewLayer.frame = self.recordingView.bounds
+            self.recordingView.layer.addSublayer(self.previewLayer)
+            self.videoRecorder.startSession()
+        }
     }
 
+    var videoRecorder: VideoRecorder!
+    var previewLayer: AVCaptureVideoPreviewLayer!
+    let recordButton = UIButton()
+    let stopBUTTON = UIButton()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        showStartRecordButton()
+        setupVideoRecorder()
+    }
+
+    func setupVideoRecorder(){
+        videoRecorder = VideoRecorder()
+        videoRecorder.delegate = self
+    }
+    
+    @IBAction func startRecord(_ sender: Any) {
+        showStopRecordButton()
+        videoRecorder.startRecording()
+    }
+    
+    @IBAction func stopRecording(_ sender: Any) {
+        showStartRecordButton()
+        videoRecorder.stopRecording()
+    }
+    
+    
+    func showStartRecordButton(){
+        btnRecord.isHidden = false
+        btnStopRecord.isHidden = true
+    }
+    
+    func showStopRecordButton(){
+        btnRecord.isHidden = true
+        btnStopRecord.isHidden = false
+    }
 
 }
 
