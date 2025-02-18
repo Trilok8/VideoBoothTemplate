@@ -18,7 +18,10 @@ class VideoRecorder: NSObject,AVCaptureFileOutputRecordingDelegate {
     private var videoOutput: AVCaptureMovieFileOutput!
     private var previewLayer: AVCaptureVideoPreviewLayer!
     private var videoDevice: AVCaptureDevice!
+    private var audioDevice: AVCaptureDevice!
     private var videoInput: AVCaptureDeviceInput!
+    private var audioInput: AVCaptureDeviceInput!
+    
     weak var delegate: VideoRecorderDelegate?
     
     override init() {
@@ -45,12 +48,22 @@ class VideoRecorder: NSObject,AVCaptureFileOutputRecordingDelegate {
             captureSession.addInput(videoInput)
         }
         
+        if let audioDevice = AVCaptureDevice.default(for: .audio),
+           let audioInput = try? AVCaptureDeviceInput(device: audioDevice),
+           captureSession.canAddInput(audioInput) {
+            self.audioDevice = audioDevice
+            self.audioInput = audioInput
+            captureSession.addInput(audioInput)
+        }
+        
         videoOutput = AVCaptureMovieFileOutput()
         if(captureSession.canAddOutput(videoOutput)){
             captureSession.addOutput(videoOutput)
         }
         
-        captureSession.startRunning()
+        DispatchQueue.global(qos: .background).async {
+            self.captureSession.startRunning()
+        }
         
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }

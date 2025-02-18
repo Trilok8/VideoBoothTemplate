@@ -26,17 +26,33 @@ class VideoEditor {
                 }
                 
                 let compositionTrack = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)
+                
+                guard let audioTrack = try await asset.loadTracks(withMediaType: .audio).first else {
+                    print("⚠️ Audio track not found")
+                    completion(false, nil)
+                    return
+                }
+                
+                // ✅ Audio composition track
+                let audioCompositionTrack = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)
+                
+                
                 let fullDuration = try await asset.load(.duration)
                 
                 // ✅ Insert the original video
                 try compositionTrack?.insertTimeRange(CMTimeRange(start: .zero, duration: fullDuration), of: videoTrack, at: .zero)
+                try audioCompositionTrack?.insertTimeRange(CMTimeRange(start: .zero, duration: fullDuration), of: audioTrack, at: .zero)
+                         
                 
                 // ✅ Apply slow-motion effect (2x slower)
                 let slowEnd = CMTimeAdd(slowMotionStart, slowMotionDuration)
                 let slowRange = CMTimeRange(start: slowMotionStart, duration: slowMotionDuration)
                 
-                let newDuration = CMTimeMultiplyByFloat64(slowMotionDuration, multiplier: 2.0) // Slow down 2x
+                let newDuration = CMTimeMultiplyByFloat64(slowMotionDuration, multiplier: 3.0) // Slow down 2x
                 compositionTrack?.scaleTimeRange(slowRange, toDuration: newDuration)
+                
+                // ✅ Apply slow-motion effect to audio (same time range)
+                audioCompositionTrack?.scaleTimeRange(slowRange, toDuration: newDuration)
                 
                 // ✅ Export the slow-motion video
                 await exportEditedVideo(composition: composition, outputURL: outputURL, completion: completion)
