@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		84731DB02D686C9900699FA2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 84731DAF2D686C9900699FA2 /* Alamofire */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		84FCAC872D636A67008A38E1 /* VideoBoothTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoBoothTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84731DB02D686C9900699FA2 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = VideoBoothTemplate;
 			packageProductDependencies = (
+				84731DAF2D686C9900699FA2 /* Alamofire */,
 			);
 			productName = VideoBoothTemplate;
 			productReference = 84FCAC872D636A67008A38E1 /* VideoBoothTemplate.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 84FCAC7E2D636A67008A38E1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				84731DAE2D686C9900699FA2 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 84FCAC882D636A67008A38E1 /* Products */;
 			projectDirPath = "";
@@ -339,6 +348,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		84731DAE2D686C9900699FA2 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = exactVersion;
+				version = 5.8.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		84731DAF2D686C9900699FA2 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84731DAE2D686C9900699FA2 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 84FCAC7F2D636A67008A38E1 /* Project object */;
 }

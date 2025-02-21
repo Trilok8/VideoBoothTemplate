@@ -12,15 +12,11 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="VideoBoothTemplate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="VideoBoothTemplate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1210"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4VN-7X-dFb">
-                                <rect key="frame" x="0.0" y="2" width="834" height="1210"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTf-xs-Bpa">
                                 <rect key="frame" x="392" y="1090" width="50" height="50"/>
                                 <constraints>
@@ -51,23 +47,102 @@
                                     <action selector="stopRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dwD-Qk-0Ln"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UuB-fU-nyJ">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="1210"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4VN-7X-dFb">
+                                <rect key="frame" x="136" y="157" width="562.5" height="1000"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1000" id="20Q-vV-1Mu"/>
+                                    <constraint firstAttribute="width" secondItem="4VN-7X-dFb" secondAttribute="height" multiplier="9:16" id="ZuU-Tr-emn"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="recBG" translatesAutoresizingMaskIntoConstraints="NO" id="df5-FG-nqc">
+                                <rect key="frame" x="151" y="1097" width="103" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="RHG-fn-q3g"/>
+                                    <constraint firstAttribute="width" secondItem="df5-FG-nqc" secondAttribute="height" multiplier="103:45" id="od9-be-zje"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="live" translatesAutoresizingMaskIntoConstraints="NO" id="eJ1-Q7-ir3">
+                                <rect key="frame" x="222" y="1109" width="22" height="21.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="22" id="f9C-4P-US5"/>
+                                    <constraint firstAttribute="width" secondItem="eJ1-Q7-ir3" secondAttribute="height" multiplier="44:43" id="thu-MB-90d"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="exS-FG-8QU">
+                                <rect key="frame" x="385" y="40" width="449" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="fu4-E8-Ku3"/>
+                                    <constraint firstAttribute="width" secondItem="exS-FG-8QU" secondAttribute="height" multiplier="449:75" id="lJ4-EJ-zhw"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jlp-fs-MoX">
+                                <rect key="frame" x="317.5" y="1115" width="79" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="AZU-JQ-ydM"/>
+                                    <constraint firstAttribute="width" secondItem="Jlp-fs-MoX" secondAttribute="height" multiplier="139:132" id="Quf-1Z-WtR"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <backgroundConfiguration key="background" image="retake"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="actionRetake:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ud0-SA-QvL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdI-Yw-G6V">
+                                <rect key="frame" x="437.5" y="1115" width="79" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="dVF-2B-f47"/>
+                                    <constraint firstAttribute="width" secondItem="pdI-Yw-G6V" secondAttribute="height" multiplier="139:132" id="fPW-Dm-Rod"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <backgroundConfiguration key="background" image="genqr"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="actionGenerateQR:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NtE-NX-Mt0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="4VN-7X-dFb" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="0sQ-GG-iLk"/>
+                            <constraint firstItem="eJ1-Q7-ir3" firstAttribute="trailing" secondItem="df5-FG-nqc" secondAttribute="trailing" constant="-10" id="1vX-SS-zB8"/>
+                            <constraint firstItem="UuB-fU-nyJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="27R-Ds-KlQ"/>
+                            <constraint firstItem="exS-FG-8QU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="40" id="4B0-UY-uN8"/>
                             <constraint firstItem="bgh-3t-txD" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="68V-5P-HeC"/>
+                            <constraint firstAttribute="bottom" secondItem="UuB-fU-nyJ" secondAttribute="bottom" id="6DK-BC-QQo"/>
+                            <constraint firstItem="eJ1-Q7-ir3" firstAttribute="centerY" secondItem="df5-FG-nqc" secondAttribute="centerY" id="7qL-YQ-4Xd"/>
                             <constraint firstItem="4VN-7X-dFb" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Fgb-ox-JPT"/>
+                            <constraint firstItem="df5-FG-nqc" firstAttribute="bottom" secondItem="4VN-7X-dFb" secondAttribute="bottom" constant="-15" id="G20-fO-NnE"/>
+                            <constraint firstItem="pdI-Yw-G6V" firstAttribute="centerY" secondItem="Jlp-fs-MoX" secondAttribute="centerY" id="Gtx-4p-c9N"/>
                             <constraint firstItem="bTf-xs-Bpa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RmW-JA-XJz"/>
+                            <constraint firstAttribute="trailing" secondItem="exS-FG-8QU" secondAttribute="trailing" id="TFI-Wc-OwL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bgh-3t-txD" secondAttribute="bottom" constant="50" id="TtU-yL-VWT"/>
-                            <constraint firstItem="4VN-7X-dFb" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="VpX-tR-g1A"/>
+                            <constraint firstItem="4VN-7X-dFb" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="50" id="VpX-tR-g1A"/>
+                            <constraint firstItem="df5-FG-nqc" firstAttribute="leading" secondItem="4VN-7X-dFb" secondAttribute="leading" constant="15" id="WQo-EO-IzP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bTf-xs-Bpa" secondAttribute="bottom" constant="50" id="Xck-Gc-G1D"/>
-                            <constraint firstItem="4VN-7X-dFb" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="l62-4A-w17"/>
+                            <constraint firstItem="pdI-Yw-G6V" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" constant="60" id="d8x-2z-5Ec"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Jlp-fs-MoX" secondAttribute="bottom" id="k8O-mN-KMQ"/>
+                            <constraint firstAttribute="trailing" secondItem="UuB-fU-nyJ" secondAttribute="trailing" id="msM-Rp-hgQ"/>
+                            <constraint firstItem="Jlp-fs-MoX" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" constant="-60" id="r4u-DH-kBK"/>
+                            <constraint firstItem="UuB-fU-nyJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="zhc-dq-Hsg"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bgVideoPlayerView" destination="UuB-fU-nyJ" id="g5r-1G-Vel"/>
                         <outlet property="btnRecord" destination="bTf-xs-Bpa" id="xeS-7b-Dmk"/>
+                        <outlet property="btnRetake" destination="Jlp-fs-MoX" id="s8X-ts-wdo"/>
                         <outlet property="btnStopRecord" destination="bgh-3t-txD" id="0vN-oe-ytd"/>
+                        <outlet property="btnUpload" destination="pdI-Yw-G6V" id="Gry-hC-7fr"/>
+                        <outlet property="imgLive" destination="eJ1-Q7-ir3" id="f85-lk-9bu"/>
+                        <outlet property="imgLogo" destination="exS-FG-8QU" id="3jR-Yk-dPR"/>
+                        <outlet property="recBG" destination="df5-FG-nqc" id="Mnj-Mo-sBq"/>
                         <outlet property="recordingView" destination="4VN-7X-dFb" id="SYv-6o-WfQ"/>
                     </connections>
                 </viewController>
@@ -92,7 +167,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="genqr" width="253" height="250"/>
+        <image name="live" width="44" height="43"/>
+        <image name="logo" width="898" height="150"/>
+        <image name="recBG" width="206" height="90"/>
         <image name="record.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="retake" width="254" height="250"/>
         <image name="stop.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

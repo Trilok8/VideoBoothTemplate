@@ -30,6 +30,8 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
     //MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("Width = \(view.bounds.width), Height = \(view.bounds.height)")
         playVideo()
     }
     
@@ -40,6 +42,10 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         playerLayer?.frame = view.bounds // Adjust size when rotating
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
     }
     
     //MARK: - Background Video Methods
@@ -202,8 +208,15 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
                 self.view.layoutIfNeeded() // Animate layout change
             }) { isCompleted in
                 if(isCompleted){
-                    print("CountDown View slide in status = \(isCompleted)")
-                    self.countDownView?.animateImages()
+                    // ✅ Call startCountdown() to begin animation
+                    self.countDownView?.startCountdown { [weak self] in
+                        print("Countdown finished!")
+                        guard let self = self else { return }
+                        
+                        countDownView?.removeFromSuperview()
+                        self.countDownView = nil
+                        self.presentRecordController()
+                    }
                 }
             }
             
@@ -223,9 +236,18 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
             }) { _ in
                 existingView.removeFromSuperview()
                 self.countDownView = nil
+                self.presentRecordController()
             }
         }
     }
+    
+    func presentRecordController(){
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+    }
+    
     
     //MARK: - Status Bar & Home Indicator Methods
     override var prefersHomeIndicatorAutoHidden: Bool {

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QRView" customModule="VideoBoothTemplate" customModuleProvider="target">
+            <connections>
+                <outlet property="imgViewQR" destination="AOy-uR-Dm8" id="u4p-OK-YY3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="esE-Ae-j4w">
+                    <rect key="frame" x="385" y="75" width="449" height="75"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="esE-Ae-j4w" secondAttribute="height" multiplier="449:75" id="IWk-CR-g95"/>
+                        <constraint firstAttribute="height" constant="75" id="Y90-9C-vme"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="last page bg" translatesAutoresizingMaskIntoConstraints="NO" id="jDL-5Z-6hH">
+                    <rect key="frame" x="115.66666666666669" y="226" width="603" height="742"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="jDL-5Z-6hH" secondAttribute="height" multiplier="1349:1660" id="IHe-A1-xaP"/>
+                        <constraint firstAttribute="width" constant="603" id="TXU-BC-g2N"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thank you" translatesAutoresizingMaskIntoConstraints="NO" id="7Se-2a-UTp">
+                    <rect key="frame" x="214" y="301" width="406" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="HxD-Oe-Yal"/>
+                        <constraint firstAttribute="width" secondItem="7Se-2a-UTp" secondAttribute="height" multiplier="272:67" id="ZOU-0I-3eM"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="please scan" translatesAutoresizingMaskIntoConstraints="NO" id="XWc-p1-Pyf">
+                    <rect key="frame" x="240.33333333333334" y="743" width="353.33333333333326" height="75"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="75" id="bOm-C9-sr5"/>
+                        <constraint firstAttribute="width" secondItem="XWc-p1-Pyf" secondAttribute="height" multiplier="824:175" id="eW8-cQ-CBL"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AOy-uR-Dm8">
+                    <rect key="frame" x="292" y="434.66666666666674" width="250" height="250"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="250" id="OxE-co-kKr"/>
+                        <constraint firstAttribute="width" constant="250" id="g6B-zm-Tbg"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3T-D2-NMp">
+                    <rect key="frame" x="377.66666666666669" y="843" width="78.666666666666686" height="75"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="75" id="Bjo-9m-zSG"/>
+                        <constraint firstAttribute="width" secondItem="h3T-D2-NMp" secondAttribute="height" multiplier="277:264" id="QUv-0z-fxX"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain">
+                        <backgroundConfiguration key="background" image="btnHome"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="actionHome:" destination="-1" eventType="touchUpInside" id="LLm-V9-yAT"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="h3T-D2-NMp" firstAttribute="bottom" secondItem="jDL-5Z-6hH" secondAttribute="bottom" constant="-50" id="2g7-db-Bd9"/>
+                <constraint firstItem="AOy-uR-Dm8" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" constant="-50" id="B1I-5z-HVR"/>
+                <constraint firstItem="AOy-uR-Dm8" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="BrW-h2-B5M"/>
+                <constraint firstItem="esE-Ae-j4w" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="75" id="EgS-0i-q9g"/>
+                <constraint firstItem="h3T-D2-NMp" firstAttribute="centerX" secondItem="XWc-p1-Pyf" secondAttribute="centerX" id="PfK-T0-Sbe"/>
+                <constraint firstItem="XWc-p1-Pyf" firstAttribute="centerX" secondItem="jDL-5Z-6hH" secondAttribute="centerX" id="Plc-k8-mwa"/>
+                <constraint firstItem="7Se-2a-UTp" firstAttribute="centerX" secondItem="jDL-5Z-6hH" secondAttribute="centerX" id="UmU-PQ-7dG"/>
+                <constraint firstItem="XWc-p1-Pyf" firstAttribute="bottom" secondItem="jDL-5Z-6hH" secondAttribute="bottom" constant="-150" id="Xm9-Oe-3nK"/>
+                <constraint firstItem="7Se-2a-UTp" firstAttribute="top" secondItem="jDL-5Z-6hH" secondAttribute="top" constant="75" id="cvX-GM-kjd"/>
+                <constraint firstItem="jDL-5Z-6hH" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="nPg-1a-glP"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="esE-Ae-j4w" secondAttribute="trailing" id="nh8-Tk-Ql1"/>
+                <constraint firstItem="jDL-5Z-6hH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="oex-VU-YWw"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="132" y="-11"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btnHome" width="253" height="250"/>
+        <image name="last page bg" width="1349" height="1660"/>
+        <image name="logo" width="898" height="150"/>
+        <image name="please scan" width="824" height="175"/>
+        <image name="thank you" width="816" height="201"/>
+    </resources>
+</document>
