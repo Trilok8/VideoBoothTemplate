@@ -70,7 +70,6 @@ class VideoRecorder: NSObject,AVCaptureFileOutputRecordingDelegate {
         // Start the session in the background
         DispatchQueue.global(qos: .background).async {
             self.captureSession.startRunning()
-            
             // After starting the session, update the isSessionReady flag
             DispatchQueue.main.async {
                 self.isSessionReady = true
@@ -112,6 +111,11 @@ class VideoRecorder: NSObject,AVCaptureFileOutputRecordingDelegate {
         guard let connection = videoOutput.connection(with: .video), connection.isActive else {
             print("⚠️ Video connection is NOT active, cannot start recording!")
             return
+        }
+        
+        // ✅ Force portrait orientation
+        if connection.isVideoOrientationSupported {
+            connection.videoOrientation = .portrait
         }
         
         print("✅ Video connection is active, starting recording...")
