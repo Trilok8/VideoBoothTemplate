@@ -54,8 +54,15 @@ class ViewController: UIViewController,VideoRecorderDelegate,QRViewDelegate {
     var qrViewWidth: CGFloat = 834
     var qrViewHeight: CGFloat = 1194
     
+    private var countDownView: CountDownView?
+    private var countDownCenterXConstraint: NSLayoutConstraint?
+    private var countDownViewWidth: CGFloat = 834
+    private var countDownViewHeight: CGFloat = 1194
+    
     private var finalVideoURL: URL?
     
+    private var startTime: Double = Double()
+    private var stopTime: Double = Double()
     //MARK: - VideoRecord Delegate methods
     func didFinishRecording(url: URL?) {
         if let videoURL = url {
@@ -65,8 +72,15 @@ class ViewController: UIViewController,VideoRecorderDelegate,QRViewDelegate {
             let outputURL = videoEditor.getVideoFilePath(prefix: "Lazulite")
 
             // ✅ Set slow motion to start at 3 seconds and last for 5 seconds
-            let slowMotionStart = CMTime(seconds: 3, preferredTimescale: 600)
-            let slowMotionDuration = CMTime(seconds: 5, preferredTimescale: 600)
+            if let floatValue = Double(UserDefaults.standard.string(forKey: "SlowStart") ?? "1"),let floatValue2 = Double(UserDefaults.standard.string(forKey: "SlowSeconds") ?? "1") {
+                startTime = floatValue
+                stopTime = floatValue2
+            } else {
+                startTime = 1
+                stopTime = 3
+            }
+            let slowMotionStart = CMTime(seconds: startTime, preferredTimescale: 600)
+            let slowMotionDuration = CMTime(seconds: stopTime, preferredTimescale: 600)
 
             videoEditor.applySlowMotionEffect(to: videoURL, slowMotionStart: slowMotionStart, slowMotionDuration: slowMotionDuration, outputURL: outputURL) { success, editedVideoURL in
                 if success, let url = editedVideoURL {
@@ -129,10 +143,10 @@ class ViewController: UIViewController,VideoRecorderDelegate,QRViewDelegate {
     
     @IBAction func actionRetake(_ sender: Any) {
         removevideoPreview()
-        recordingView.isHidden = false
-        recBG.isHidden = false
-        imgLive.isHidden = false
-        videoRecorder.cameraSetup()
+        addCountDownView()
+        recordingView.isHidden = true
+        recBG.isHidden = true
+        imgLive.isHidden = true
         
         btnRetake.isHidden = true
         btnUpload.isHidden = true
@@ -261,6 +275,78 @@ class ViewController: UIViewController,VideoRecorderDelegate,QRViewDelegate {
         return true
     }
     
+    //MARK: - CountDownView Methods
+    func addCountDownView() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.sendCommand(command: UserDefaults.standard.string(forKey: "StartCommand") ?? "")
+        if countDownView == nil {
+            let newCountDownView = CountDownView()
+            //newCountDownView.delegate = self
+            newCountDownView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(newCountDownView)
+            
+            countDownCenterXConstraint = newCountDownView.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: countDownViewWidth) // Start off-screen
+            NSLayoutConstraint.activate([
+                countDownCenterXConstraint!,
+                newCountDownView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+                newCountDownView.widthAnchor.constraint(equalToConstant: countDownViewWidth),
+                newCountDownView.heightAnchor.constraint(equalToConstant: countDownViewHeight)
+            ])
+            
+            view.layoutIfNeeded() // Apply layout updates immediately
+            countDownView = newCountDownView
+            
+            // Animate by changing the leading constraint
+            countDownCenterXConstraint?.isActive = false
+            countDownCenterXConstraint = newCountDownView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0) // Move in from the right
+            countDownCenterXConstraint?.isActive = true
+            
+            UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.5, options: [], animations: {
+                self.view.layoutIfNeeded() // Animate layout change
+            }) { isCompleted in
+                if(isCompleted){
+                    if let doubleValue = Double(UserDefaults.standard.string(forKey: "CountDown") ?? "3"){
+                        Timer.scheduledTimer(timeInterval: doubleValue, target: self, selector: #selector(self.startCountDown), userInfo: nil, repeats: false)
+                    }
+                }
+            }
+            
+            
+        }
+    }
+    
+    @objc func startCountDown(){
+        self.countDownView?.startCountdown { [weak self] in
+            print("Countdown finished!")
+            guard let self = self else { return }
+            
+            countDownView?.removeFromSuperview()
+            self.countDownView = nil
+            
+            recordingView.isHidden = false
+            recBG.isHidden = false
+            imgLive.isHidden = false
+            videoRecorder.cameraSetup()
+        }
+    }
+    
+    /// Function to remove StartView with slide-out to the left animation
+    func removeCountDownView() {
+        if let existingView = countDownView {
+            countDownCenterXConstraint?.isActive = false
+            countDownCenterXConstraint = existingView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -view.frame.width) // Move out to left
+            countDownCenterXConstraint?.isActive = true
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.layoutIfNeeded() // Animate layout update
+            }) { _ in
+                existingView.removeFromSuperview()
+                self.countDownView = nil
+            }
+        }
+    }
+    
+    //MARK: - QR View
     func addQRView(fileName: String) {
         
         btnRetake.isHidden = true

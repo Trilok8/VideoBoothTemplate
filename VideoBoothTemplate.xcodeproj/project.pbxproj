@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		84731DB02D686C9900699FA2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 84731DAF2D686C9900699FA2 /* Alamofire */; };
+		84CB93952D69590400DF865E /* SwiftyBluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 84CB93942D69590400DF865E /* SwiftyBluetooth */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84731DB02D686C9900699FA2 /* Alamofire in Frameworks */,
+				84CB93952D69590400DF865E /* SwiftyBluetooth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = VideoBoothTemplate;
 			packageProductDependencies = (
 				84731DAF2D686C9900699FA2 /* Alamofire */,
+				84CB93942D69590400DF865E /* SwiftyBluetooth */,
 			);
 			productName = VideoBoothTemplate;
 			productReference = 84FCAC872D636A67008A38E1 /* VideoBoothTemplate.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				84731DAE2D686C9900699FA2 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				84CB93932D69590400DF865E /* XCRemoteSwiftPackageReference "SwiftyBluetooth" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 84FCAC882D636A67008A38E1 /* Products */;
@@ -358,6 +362,14 @@
 				version = 5.8.1;
 			};
 		};
+		84CB93932D69590400DF865E /* XCRemoteSwiftPackageReference "SwiftyBluetooth" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jordanebelanger/SwiftyBluetooth";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -365,6 +377,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 84731DAE2D686C9900699FA2 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		84CB93942D69590400DF865E /* SwiftyBluetooth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84CB93932D69590400DF865E /* XCRemoteSwiftPackageReference "SwiftyBluetooth" */;
+			productName = SwiftyBluetooth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

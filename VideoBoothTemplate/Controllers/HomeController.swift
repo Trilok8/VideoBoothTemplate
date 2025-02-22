@@ -27,6 +27,19 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
     private var countDownViewWidth: CGFloat = 834
     private var countDownViewHeight: CGFloat = 1194
     
+    private var count: Int = 0
+    var resetTimer: Timer?
+    
+    @IBOutlet weak var btnConfig: UIButton!
+    @IBOutlet weak var configView: UIView!
+    
+    @IBOutlet weak var fldDeviceName: UITextField!
+    @IBOutlet weak var fldTotalTimer: UITextField!
+    @IBOutlet weak var fldCountDownTimer: UITextField!
+    @IBOutlet weak var fldSlowStart: UITextField!
+    @IBOutlet weak var fldSlowSeconds: UITextField!
+    @IBOutlet weak var fldArmCommand: UITextField!
+    
     //MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +49,7 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        configView.isHidden = true
         addStartView()
     }
     
@@ -46,6 +60,35 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
+    }
+    
+    @IBAction func showConfig(_ sender: Any) {
+        if(count < 3){
+            resetTimer?.invalidate()
+            count = count + 1
+            resetTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(resetConfig), userInfo: nil, repeats: false)
+        } else {
+            count = 0
+            configView.isHidden = false
+            view.bringSubviewToFront(configView)
+        }
+    }
+    
+    @objc func resetConfig(){
+        count = 0
+    }
+    
+    @IBAction func actionSaveConfig(_ sender: Any) {
+        UserDefaults.standard.set(fldDeviceName.text, forKey: "DeviceName")
+        UserDefaults.standard.set(fldTotalTimer.text, forKey: "TotalTimer")
+        UserDefaults.standard.set(fldCountDownTimer.text, forKey: "CountDown")
+        UserDefaults.standard.set(fldSlowStart.text, forKey: "SlowStart")
+        UserDefaults.standard.set(fldSlowSeconds.text, forKey: "SlowSeconds")
+        UserDefaults.standard.set(fldArmCommand.text, forKey: "StartCommand")
+    }
+    
+    @IBAction func actionCloseConfig(_ sender: Any) {
+        configView.isHidden = true
     }
     
     //MARK: - Background Video Methods
@@ -84,7 +127,7 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
             newStartView.delegate = self
             newStartView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(newStartView)
-            
+            view.bringSubviewToFront(btnConfig)
             startViewCenterXConstraint = newStartView.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: startViewWidth) // Start off-screen
             NSLayoutConstraint.activate([
                 startViewCenterXConstraint!,
@@ -188,7 +231,7 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
             newCountDownView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(newCountDownView)
             
-            countDownCenterXConstraint = newCountDownView.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: registrationWidth) // Start off-screen
+            countDownCenterXConstraint = newCountDownView.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: countDownViewWidth) // Start off-screen
             NSLayoutConstraint.activate([
                 countDownCenterXConstraint!,
                 newCountDownView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -208,19 +251,22 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
                 self.view.layoutIfNeeded() // Animate layout change
             }) { isCompleted in
                 if(isCompleted){
-                    // ✅ Call startCountdown() to begin animation
-                    self.countDownView?.startCountdown { [weak self] in
-                        print("Countdown finished!")
-                        guard let self = self else { return }
-                        
-                        countDownView?.removeFromSuperview()
-                        self.countDownView = nil
-                        self.presentRecordController()
+                    if let doubleValue = Double(UserDefaults.standard.string(forKey: "CountDown") ?? "3"){
+                        Timer.scheduledTimer(timeInterval: doubleValue, target: self, selector: #selector(self.startCountDown), userInfo: nil, repeats: false)
                     }
                 }
             }
+        }
+    }
+    
+    @objc func startCountDown(){
+        self.countDownView?.startCountdown { [weak self] in
+            print("Countdown finished!")
+            guard let self = self else { return }
             
-            
+            countDownView?.removeFromSuperview()
+            self.countDownView = nil
+            self.presentRecordController()
         }
     }
     

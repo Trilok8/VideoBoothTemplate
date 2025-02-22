@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>TheMixPlain.ttf</string>
+	</array>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>For BLE</string>
 	<key>NSCameraUsageDescription</key>
 	<string>We need access to your camera for recording video</string>
 	<key>NSMicrophoneUsageDescription</key>
@@ -15,6 +21,16 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>For BLE</string>
+	<key>CFBundleIdentifier</key>
+	<string></string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

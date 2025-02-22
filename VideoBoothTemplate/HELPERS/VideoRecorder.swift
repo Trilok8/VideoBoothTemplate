@@ -119,7 +119,13 @@ class VideoRecorder: NSObject,AVCaptureFileOutputRecordingDelegate {
         print("Video Recording Started: \(videoOutput.isRecording)")
         
         // Automatically stop after 10 seconds
-        Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(stopRecord), userInfo: nil, repeats: false)
+        
+        if let floatValue = Float(UserDefaults.standard.string(forKey: "TotalTimer") ?? "10") {
+            Timer.scheduledTimer(timeInterval: TimeInterval(floatValue), target: self, selector: #selector(stopRecord), userInfo: nil, repeats: false)
+        } else {
+            Timer.scheduledTimer(timeInterval: TimeInterval(10), target: self, selector: #selector(stopRecord), userInfo: nil, repeats: false)
+        }
+        
     }
     
     @objc func stopRecord() {

@@ -1,5 +1,5 @@
 {
-  "originHash" : "11b78eba97192d19796cff581fdf69b3e65b441188b1448a1b67e5d7b825a354",
+  "originHash" : "91a62bcc2102cdcdd1e2d4331692ba2e86579d36623e40ff9c6b30c48e15cbc0",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "3dc6a42c7727c49bf26508e29b0a0b35f9c7e1ad",
         "version" : "5.8.1"
+      }
+    },
+    {
+      "identity" : "swiftybluetooth",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jordanebelanger/SwiftyBluetooth",
+      "state" : {
+        "revision" : "83694e28f40da9c60457228883166e3ca55a70c1",
+        "version" : "3.1.0"
       }
     }
   ],
