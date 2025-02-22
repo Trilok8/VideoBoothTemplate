@@ -41,7 +41,7 @@ class VideoRecorder: NSObject,AVCaptureFileOutputRecordingDelegate {
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .high
         
-        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
+        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front),
               let input = try? AVCaptureDeviceInput(device: device) else {
             print("Error: Cannot access camera")
             return
