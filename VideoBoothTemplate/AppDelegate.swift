@@ -9,7 +9,7 @@ import UIKit
 import SwiftyBluetooth
 import CoreBluetooth
 
-let serviceID = "0003abcd-0000-1000-8000-00805F9B34FB"
+let serviceID = "0000FFE0-0000-1000-8000-00805F9B34FB"
 let characteristicID = "FFE1"
 
 @main
@@ -54,7 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print("Scan for devices has been called")
                 case .scanResult(peripheral: let peripheral, advertisementData: let advertisementData, RSSI: let RSSI):
                     print("Scanning has a result")
-                    if peripheral.identifier == UUID(uuidString: saveDeviceIdentifier!) {
+                    print("Name = \(peripheral.name)")
+                    if peripheral.name == saveDeviceIdentifier {
                         SwiftyBluetooth.stopScan()
                         self.saveDevice = peripheral
                         self.saveDevice.connect(withTimeout: .infinity, completion: {(result) in

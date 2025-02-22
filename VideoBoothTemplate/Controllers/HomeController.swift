@@ -71,6 +71,12 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
             count = 0
             configView.isHidden = false
             view.bringSubviewToFront(configView)
+            fldDeviceName.text = UserDefaults.standard.string(forKey: "DeviceName")
+            fldTotalTimer.text = UserDefaults.standard.string(forKey: "TotalTimer")
+            fldCountDownTimer.text = UserDefaults.standard.string(forKey: "CountDown")
+            fldSlowStart.text = UserDefaults.standard.string(forKey: "SlowStart")
+            fldSlowSeconds.text = UserDefaults.standard.string(forKey: "SlowSeconds")
+            fldArmCommand.text = UserDefaults.standard.string(forKey: "StartCommand")
         }
     }
     
@@ -225,6 +231,8 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
     
     //MARK: - CountDownView Methods
     func addCountDownView() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.sendCommand(command: UserDefaults.standard.string(forKey: "StartCommand") ?? "")
         if countDownView == nil {
             let newCountDownView = CountDownView()
             //newCountDownView.delegate = self
