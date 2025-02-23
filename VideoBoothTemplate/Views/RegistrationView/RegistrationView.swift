@@ -74,7 +74,7 @@ class RegistrationView: UIView,UITextFieldDelegate {
         let name = nameTextField.text ?? ""
         let mail = emailTextField.text ?? ""
         let phone = phoneTextField.text ?? ""
-        if(name.count > 3 && isValidEmail(mail) && phone.count >= 9) {
+        if(name.count > 1 && mail.contains("@") && mail.contains(".") && phone.count >= 9) {
             writeToCSV(fileName: "UserData.csv", data: [name,mail,phone])
         } else {
             if(name.count < 3){

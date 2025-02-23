@@ -147,7 +147,7 @@ class ViewController: UIViewController,VideoRecorderDelegate,QRViewDelegate {
         recordingView.isHidden = true
         recBG.isHidden = true
         imgLive.isHidden = true
-        
+        imgLogo.isHidden = true
         btnRetake.isHidden = true
         btnUpload.isHidden = true
     }
@@ -322,7 +322,7 @@ class ViewController: UIViewController,VideoRecorderDelegate,QRViewDelegate {
             
             countDownView?.removeFromSuperview()
             self.countDownView = nil
-            
+            imgLogo.isHidden = false
             recordingView.isHidden = false
             recBG.isHidden = false
             imgLive.isHidden = false
