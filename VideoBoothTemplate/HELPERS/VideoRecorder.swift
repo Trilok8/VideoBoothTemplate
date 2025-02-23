@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import UIKit
 
 protocol VideoRecorderDelegate: AnyObject {
     func didFinishRecording(url: URL?)
@@ -73,13 +74,16 @@ class VideoRecorder: NSObject,AVCaptureFileOutputRecordingDelegate {
             // After starting the session, update the isSessionReady flag
             DispatchQueue.main.async {
                 self.isSessionReady = true
+                print("Did setup preview layer in background thread main async")
                 self.delegate?.didSetupPreviewLayer(_previewLayer: self.previewLayer)
             }
         }
         
         DispatchQueue.main.async {
+            print("Did setup preview layer out of background thread main async")
             self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
             self.previewLayer?.videoGravity = .resizeAspectFill
+            self.configurePreviewLayer(for: .portrait)
             if let previewLayer = self.previewLayer {
                 self.delegate?.didSetupPreviewLayer(_previewLayer: previewLayer)
             }
@@ -105,7 +109,7 @@ class VideoRecorder: NSObject,AVCaptureFileOutputRecordingDelegate {
         }
         
         isStoppingRecording = false
-        let outputFilePath = getVideoFilePath(prefix: "Lazulite")
+        let outputFilePath = getVideoFilePath(prefix: "Lazulite", folderName: "RecordedVideos")
         print("Starting Video Record at file path: \(outputFilePath)")
         
         guard let connection = videoOutput.connection(with: .video), connection.isActive else {
@@ -113,9 +117,10 @@ class VideoRecorder: NSObject,AVCaptureFileOutputRecordingDelegate {
             return
         }
         
-        // ✅ Force portrait orientation
-        if connection.isVideoOrientationSupported {
-            connection.videoOrientation = .portrait
+        DispatchQueue.main.async {
+            if let connection = self.videoOutput.connection(with: .video), connection.isVideoOrientationSupported {
+                connection.videoOrientation = .portrait
+            }
         }
         
         print("✅ Video connection is active, starting recording...")
@@ -159,14 +164,15 @@ class VideoRecorder: NSObject,AVCaptureFileOutputRecordingDelegate {
             return
         } else {
             print("Recording Finished")
+            
+            self.delegate?.didFinishRecording(url: outputFileURL)
         }
-        delegate?.didFinishRecording(url: outputFileURL)
     }
     
-    private func getVideoFilePath(prefix: String) -> URL {
+    private func getVideoFilePath(prefix: String,folderName: String) -> URL {
         let fileManager = FileManager.default
         let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let appVideosDirectory = documentDirectory.appendingPathComponent("RecordedVideos")
+        let appVideosDirectory = documentDirectory.appendingPathComponent(folderName)
         if !fileManager.fileExists(atPath: appVideosDirectory.path) {
             do {
                 try fileManager.createDirectory(at: appVideosDirectory, withIntermediateDirectories: true, attributes: nil)
@@ -181,5 +187,26 @@ class VideoRecorder: NSObject,AVCaptureFileOutputRecordingDelegate {
         
         let videoFileName = "\(prefix)_\(timeStamp).mov"
         return appVideosDirectory.appendingPathComponent(videoFileName)
+    }
+    
+    func configurePreviewLayer(for orientation: UIDeviceOrientation) {
+        guard let previewLayer = self.previewLayer else { return }
+        
+        switch orientation {
+        case .portrait:
+            print("Orientaion is portrait")
+            previewLayer.connection?.videoOrientation = .portrait
+        case .landscapeLeft:
+            print("Orientaion is Landscape Left")
+            previewLayer.connection?.videoOrientation = .landscapeRight
+        case .landscapeRight:
+            print("Orientaion is Landscape Right")
+            previewLayer.connection?.videoOrientation = .landscapeLeft
+        case .portraitUpsideDown:
+            print("Orientaion is Portrait Upsdide Down")
+            previewLayer.connection?.videoOrientation = .portraitUpsideDown
+        default:
+            break
+        }
     }
 }
