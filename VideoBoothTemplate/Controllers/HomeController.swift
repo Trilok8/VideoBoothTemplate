@@ -150,7 +150,7 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
             startViewCenterXConstraint = newStartView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0) // Move in from the right
             startViewCenterXConstraint?.isActive = true
             
-            UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.5, options: [], animations: {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.5, options: [], animations: {
                 self.view.layoutIfNeeded() // Animate layout change
             })
         }
@@ -201,7 +201,7 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
             registrationViewCenterXConstraint = newRegistrationView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0) // Move in from the right
             registrationViewCenterXConstraint?.isActive = true
             
-            UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.5, options: [], animations: {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.5, options: [], animations: {
                 self.view.layoutIfNeeded() // Animate layout change
             })
         }
@@ -255,7 +255,7 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
             countDownCenterXConstraint = newCountDownView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0) // Move in from the right
             countDownCenterXConstraint?.isActive = true
             
-            UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.5, options: [], animations: {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.5, options: [], animations: {
                 self.view.layoutIfNeeded() // Animate layout change
             }) { isCompleted in
                 if(isCompleted){

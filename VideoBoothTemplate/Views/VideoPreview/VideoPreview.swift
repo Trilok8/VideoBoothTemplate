@@ -12,7 +12,6 @@ class VideoPreview: UIView {
     private var player: AVPlayer?
     private var playerLayer: AVPlayerLayer?
     private var timeObserver: Any?
-    
     @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var btnPlay: UIButton!
@@ -48,6 +47,8 @@ class VideoPreview: UIView {
         playerLayer?.videoGravity = .resizeAspectFill
         playerLayer?.frame = playerView.bounds
         playerView.layer.addSublayer(playerLayer!)
+        
+        
     }
     
     // MARK: - Setup Controls
@@ -61,6 +62,7 @@ class VideoPreview: UIView {
     // MARK: - Public Methods
     func playVideo(with url: URL) {
         let playerItem = AVPlayerItem(url: url)
+        rotateVideoPlayerLayer(playerLayer: playerLayer!, playerItem: playerItem)
         player = AVPlayer(playerItem: playerItem)
         playerLayer?.player = player
         
@@ -128,5 +130,25 @@ class VideoPreview: UIView {
         if let observer = timeObserver {
             player?.removeTimeObserver(observer)
         }
+    }
+    
+    func rotateVideoPlayerLayer(playerLayer: AVPlayerLayer, playerItem: AVPlayerItem) {
+        let rotationAngle: CGFloat = .pi / 2
+        let rotationTransform = CGAffineTransform(rotationAngle: rotationAngle)
+        
+        // Set the affine transform for rotation
+        playerLayer.setAffineTransform(rotationTransform)
+        
+        // Set the bounds of the player layer to match the view's bounds
+        let viewSize = playerView.bounds.size
+        playerLayer.bounds = CGRect(origin: .zero, size: viewSize)
+        
+        // Reposition the player layer to keep the video centered in the view
+        let xPosition = playerView.bounds.midX
+        let yPosition = playerView.bounds.midY
+        playerLayer.position = CGPoint(x: xPosition, y: yPosition)
+        
+        // Set the content mode to scale the video to fit the view, preserving aspect ratio
+        playerLayer.videoGravity = .resizeAspect
     }
 }
