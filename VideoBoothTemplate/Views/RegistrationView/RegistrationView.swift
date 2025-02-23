@@ -23,7 +23,7 @@ class RegistrationView: UIView,UITextFieldDelegate {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        lblError.text = ""
+        
         setupView()
     }
     
@@ -34,6 +34,7 @@ class RegistrationView: UIView,UITextFieldDelegate {
     
     private func setupView() {
         loadNib()
+        lblError.text = ""
         setupGestureForKeyboardDismiss()
         setupTextFields()
     }
@@ -96,7 +97,7 @@ class RegistrationView: UIView,UITextFieldDelegate {
         let fileManager = FileManager.default
         let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileURL = documentDirectory.appendingPathComponent(fileName)
-        
+        print(fileURL.absoluteString)
         let csvLine = data.joined(separator: ",") + "\n"
         
         if fileManager.fileExists(atPath: fileURL.path) {
