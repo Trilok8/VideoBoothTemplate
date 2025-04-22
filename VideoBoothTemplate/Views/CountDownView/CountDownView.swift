@@ -50,7 +50,7 @@ class CountDownView: UIView {
         // Constraints for countdownImageView (Position at the bottom of the superview)
         NSLayoutConstraint.activate([
             countdownImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            countdownImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100), // Adjust the '20' to control the distance from the bottom
+            countdownImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -200), // Adjust the '20' to control the distance from the bottom
             countdownImageView.widthAnchor.constraint(equalToConstant: 100),
             countdownImageView.heightAnchor.constraint(equalToConstant: 100)
         ])
@@ -116,8 +116,9 @@ class CountDownView: UIView {
     //MARK: - Play PNG Sequence
     private func addImages(){
         for i in 0...90 {
+            //Comp 1_00000
             let number = String(format: "%02d", i)
-            if let path = Bundle.main.path(forResource: "Step back\(number)", ofType: ".png"){
+            if let path = Bundle.main.path(forResource: "Comp 1_000\(number)", ofType: ".png"){
                 if let image = UIImage(contentsOfFile: path){
                     images.append(image)
                 }

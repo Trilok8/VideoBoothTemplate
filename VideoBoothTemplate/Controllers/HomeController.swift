@@ -14,18 +14,18 @@ class HomeController: UIViewController,StartViewDelegate,RegistrationViewDelegat
     var playerLayer: AVPlayerLayer?
     private var startView: StartView?
     private var startViewCenterXConstraint: NSLayoutConstraint?
-    private var startViewWidth:CGFloat = 603
-    private var startViewHeight:CGFloat = 738
+    private var startViewWidth:CGFloat = 834
+    private var startViewHeight:CGFloat = 1210
     
     private var registrationView: RegistrationView?
     private var registrationViewCenterXConstraint: NSLayoutConstraint?
     private var registrationWidth: CGFloat = 834
-    private var registrationViewHeight: CGFloat = 1194
+    private var registrationViewHeight: CGFloat = 1210
     
     private var countDownView: CountDownView?
     private var countDownCenterXConstraint: NSLayoutConstraint?
     private var countDownViewWidth: CGFloat = 834
-    private var countDownViewHeight: CGFloat = 1194
+    private var countDownViewHeight: CGFloat = 1210
     
     private var count: Int = 0
     var resetTimer: Timer?

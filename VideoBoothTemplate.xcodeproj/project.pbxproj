@@ -159,7 +159,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y38XQ7EWLB;
+				DEVELOPMENT_TEAM = VGB6WN5UVP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VideoBoothTemplate/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera for recording video";
@@ -191,7 +191,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y38XQ7EWLB;
+				DEVELOPMENT_TEAM = VGB6WN5UVP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VideoBoothTemplate/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera for recording video";
