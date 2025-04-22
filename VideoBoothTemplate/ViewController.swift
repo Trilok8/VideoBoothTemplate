@@ -173,7 +173,7 @@ class ViewController: UIViewController,VideoRecorderDelegate,QRViewDelegate {
             
             //https://lazulite.online/routes/UAEU/upload-video
             //
-            if let url = URL(string: "http://15.185.43.17:8000/UAEU/upload-video"){
+            if let url = URL(string: "https://lazulite.online/routes/Lazulite/upload-video"){
                 let headers = [
                     "Content-type": "multipart/form-data"
                 ]
@@ -322,7 +322,7 @@ class ViewController: UIViewController,VideoRecorderDelegate,QRViewDelegate {
             
             countDownView?.removeFromSuperview()
             self.countDownView = nil
-            imgLogo.isHidden = false
+            imgLogo.isHidden = true
             recordingView.isHidden = false
             recBG.isHidden = false
             imgLive.isHidden = false
@@ -378,7 +378,7 @@ class ViewController: UIViewController,VideoRecorderDelegate,QRViewDelegate {
                 self.view.layoutIfNeeded() // Animate layout change
             })
             
-            qrView?.setQRCode(urlString: "http://15.185.43.17:8000/UAEU/DownloadVideo?filename=\(fileName)")
+            qrView?.setQRCode(urlString: "https://lazulite.online/routes/Lazulite/DownloadVideo?filename=\(fileName)")
         }
     }
     
